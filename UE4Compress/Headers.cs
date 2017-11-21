@@ -66,25 +66,6 @@ namespace UE4Compress
             UncompressedSize = uncompressedSize;
             ChunkHeaders = chunkHeaders;
         }
-
-        public byte[] SerializeData(List<byte[]> chunks)
-        {
-            var serializedData = new List<byte>();
-            serializedData.AddRange(ECompressionFlags);
-            serializedData.AddRange(BitConverter.GetBytes(ChunkSize));
-            serializedData.AddRange(BitConverter.GetBytes(CompressedSize));
-            serializedData.AddRange(BitConverter.GetBytes(UncompressedSize));
-            foreach (var chunkHeader in ChunkHeaders)
-            {
-                serializedData.AddRange(BitConverter.GetBytes(chunkHeader.CompressedBuffer));
-                serializedData.AddRange(BitConverter.GetBytes(chunkHeader.UncompressedBuffer));
-            }
-            foreach (var chunk in chunks)
-            {
-                serializedData.AddRange(chunk);
-            }
-            return serializedData.ToArray();
-        }
     }
 
     public class ChunkHeader
