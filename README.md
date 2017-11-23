@@ -18,3 +18,20 @@ AssetName.uasset.z.uncompressed_size
 the problem you will 1st see if you cook from command line is that you asset get's cooked but uncompressed, like they should be once installed in Ark after download only the UI wizard does it for you as it's not part of the cook but actual Custom preparation for Ark to avoid big download on mod installation.
 
 That's where this project comes in, if you want to go forward with continious integration you can use this tool to do that extra needed step before Using Steamcmd.exe to upload.
+
+Usages,
+
+Compress a single file:
+```
+UE4Compress.exe -c "C:\SourceFile.uasset" "C:\OutputFolder"
+```
+Decompress a single file:
+```
+UE4Compress.exe -d "C:\SourceFile.uasset.z" "C:\OutputFolder"
+```
+Compress a mod cook output:
+```
+UE4Compress.exe -cmod "C:\WindowsNoEditorPath" "C:\LinuxNoEditorPath" "C:\OutputFolder"
+```
+
+Special thanks to [jslay](https://wiki.arkmodding.net/index.php?title=User:Jslay) AKA [jslay88](https://github.com/jslay88) from the [ARK Modding](https://wiki.arkmodding.net/) community for helping me understand the chunk structure and pointing me to the source code from Unreal Engine that handles the compression.
