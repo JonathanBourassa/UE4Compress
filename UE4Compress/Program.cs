@@ -76,27 +76,15 @@ namespace UE4Compress
                     var linuxSourceFolder = args[2].TrimEnd('\\');
                     var destinationDirectory = args[3].TrimEnd('\\');
 
-                    var modFolderName = new DirectoryInfo(windowsSourceFolder).GetDirectories().FirstOrDefault();
-                    if (modFolderName == null)
-                    {
-                        Console.WriteLine("Windows Source Folder is empty.");
-                        Environment.Exit(1);
-                    }
-                    var windowsFileList = WalkDirectoryTree(modFolderName);
+                    var windowsFileList = WalkDirectoryTree(new DirectoryInfo(windowsSourceFolder));
                     if (!Directory.Exists($"{destinationDirectory}\\WindowsNoEditor"))
                         Directory.CreateDirectory($"{destinationDirectory}\\WindowsNoEditor");
-                    CompressModFolder(windowsFileList, $"{windowsSourceFolder}\\{modFolderName}", $"{destinationDirectory}\\WindowsNoEditor");
+                    CompressModFolder(windowsFileList, $"{windowsSourceFolder}", $"{destinationDirectory}\\WindowsNoEditor");
 
-                    modFolderName = new DirectoryInfo(linuxSourceFolder).GetDirectories().FirstOrDefault();
-                    if (modFolderName == null)
-                    {
-                        Console.WriteLine("Linux Source Folder is empty.");
-                        Environment.Exit(1);
-                    }
-                    var lunuxFileList = WalkDirectoryTree(modFolderName);
+                    var lunuxFileList = WalkDirectoryTree(new DirectoryInfo(linuxSourceFolder));
                     if (!Directory.Exists($"{destinationDirectory}\\LinuxNoEditor"))
                         Directory.CreateDirectory($"{destinationDirectory}\\LinuxNoEditor");
-                    CompressModFolder(lunuxFileList, $"{linuxSourceFolder}\\{modFolderName}" , $"{destinationDirectory}\\LinuxNoEditor");
+                    CompressModFolder(lunuxFileList, $"{linuxSourceFolder}" , $"{destinationDirectory}\\LinuxNoEditor");
                 }
             }
             else if (args.Length == 1)
